@@ -1,6 +1,10 @@
 <template>
   <button v-on:click="csv2json">csvをjsonに変換</button>
   <p>{{ message }}</p>
+  <p>
+    <span>区切り文字: </span>
+    <input type="text" v-model="separator" />
+  </p>
   <div id="container">
     <div id="csv-area">
       <h3>CSV</h3>
@@ -24,13 +28,13 @@ val1,val2,val3\n\
 val1,val2,val3\n\
 val1,val2,val3",
       message: "",
+      separator: ",",
     };
   },
   methods: {
     csv2json: function () {
       const lines = this.csv.split("\n");
-      console.log(lines);
-      const separator = ["\t", ","];
+      const separator = this.separator;
 
       // ヘッダー取得
       const header = lines[0].split(separator);
